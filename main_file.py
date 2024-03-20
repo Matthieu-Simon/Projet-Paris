@@ -15,6 +15,7 @@ import scipy
 import os
 dossier_execution = os.path.dirname(os.path.abspath(__file__)) 
 import save_data_from_api as sd
+import seaborn as sns
 
 #import gaussian_kde
 "%matplotlib inline"
@@ -46,10 +47,39 @@ def modifier_horaire(valeur):
 
 def split_arr(valeur):
     return int(str(valeur)[-2:])
-
+def arr_tostring(valeur):
+    return str(valeur) 
 df['ACCES_PMR'] = df['ACCES_PMR'].apply(modifier_valeur)
 df['RELAIS_BEBE'] = df['RELAIS_BEBE'].apply(modifier_valeur)
 df['ARRONDISSEMENT']=df['ARRONDISSEMENT'].apply(split_arr)
 df['HORAIRE']=df['HORAIRE'].apply(modifier_horaire)
-print(df)
-print(df.shape)
+
+#copie de la colonne arrondissement en DataFrame
+df_toilette_arrondissement = pandas.DataFrame(df['ARRONDISSEMENT'].sort_values()) # trie les arrondissements
+df_toilette_arrondissement['ARRONDISSEMENT']=df_toilette_arrondissement['ARRONDISSEMENT'].apply(arr_tostring)
+
+# compter le nombre de toilettes par arrondissement
+nombre_toilette_arrondissement = df_toilette_arrondissement[df_toilette_arrondissement['ARRONDISSEMENT'] == "18"].shape[0] # attention valeur du  ==
+print(nombre_toilette_arrondissement)
+
+sns.set_theme(style="darkgrid")
+
+gt_nb_toilette_by_arrondissement = sns.histplot(data=df_toilette_arrondissement, x="ARRONDISSEMENT", discrete=True,  shrink=.5 ) #shrink = largeur de la colonne
+
+# affichage de la valeur max en haut de chaque colonne
+gt_nb_toilette_by_arrondissement.bar_label(gt_nb_toilette_by_arrondissement.containers[0], fontsize=10)
+
+#rotation affichage des x
+plt.xticks(rotation=30)
+
+plt.title("Toilettes par arrondissement")
+plt.xlabel("Arrondissement")
+plt.ylabel("Nombre de Toilettes")
+
+plt.show()
+
+
+
+
+
+
