@@ -8,8 +8,8 @@ def save_data_from_online():
     url = "https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/sanisettesparis/exports/csv?lang=fr&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B"
 
     # Nom du fichier de sortie
-    output_file = dossier_execution + "/sanisettes_paris.csv"
-   
+    output_file = dossier_execution + "sanisettes_paris.csv"
+
     # Effectuer la requête HTTP
     response = requests.get(url)
 
@@ -23,12 +23,8 @@ def save_data_from_online():
         pass
         #print("La requête a échoué. Statut code :", response.status_code)
 
-
-
- 
-
 def creation_date_today():
-    file_path= dossier_execution + "/sanisettes_paris.csv"
+    file_path = dossier_execution + "/sanisettes_paris.csv"
     print(file_path)
     # Obtient la date de création du fichier
     creation_time = os.path.getctime(file_path)
