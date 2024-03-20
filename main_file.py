@@ -18,16 +18,15 @@ import save_data_from_api as sd
 import seaborn as sns
 #import gaussian_kde
 "%matplotlib inline"
-if sd.creation_date_today()==False:
+if sd.creation_date_today() == False:
     sd.save_data_from_online()
 
 
-
-df=pandas.read_csv(dossier_execution + "/sanisettes_paris.csv",sep=';',header=0)
+df = pandas.read_csv(dossier_execution + "/sanisettes_paris.csv",sep=';',header=0)
 df = df.drop('URL_FICHE_EQUIPEMENT', axis=1)
 df = df.drop('geo_shape', axis=1)
 df = df.drop('geo_point_2d', axis=1)
-df=df.drop('STATUT', axis=1)
+df = df.drop('STATUT', axis=1)
 
 def modifier_valeur(valeur):
     if pandas.isna(valeur):

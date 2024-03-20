@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from  views  import index
-urlpatterns = [path('', index, name='index')
-              , path('index/', index, name='index')
+from MakePi import  views   
+urlpatterns = [path('', views.index, name='index')
+              , path('index/', views.index, name='index')
+              , path('admin/', admin.site.urls)
 ]
