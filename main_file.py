@@ -18,7 +18,11 @@ import save_data_from_api as sd
 
 #import gaussian_kde
 "%matplotlib inline"
-sd.save_data_from_online()
+if sd.creation_date_today()==False:
+    sd.save_data_from_online()
+
+
+
 df=pandas.read_csv(dossier_execution + "/sanisettes_paris.csv",sep=';',header=0)
 df = df.drop('URL_FICHE_EQUIPEMENT', axis=1)
 df = df.drop('geo_shape', axis=1)

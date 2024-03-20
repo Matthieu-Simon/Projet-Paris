@@ -1,5 +1,7 @@
 import requests
 import os
+import datetime
+
 dossier_execution = os.path.dirname(os.path.abspath(__file__)) 
 def save_data_from_online():
 # Lien vers le fichier CSV
@@ -20,5 +22,27 @@ def save_data_from_online():
     else:
         pass
         #print("La requête a échoué. Statut code :", response.status_code)
+
+
+
+ 
+
+def creation_date_today():
+    file_path= dossier_execution + "/sanisettes_paris.csv"
+    print(file_path)
+    # Obtient la date de création du fichier
+    creation_time = os.path.getctime(file_path)
+    
+    # Convertit le temps de création en objet de date et heure
+    creation_datetime = datetime.datetime.fromtimestamp(creation_time)
+    
+    # Obtient la date d'aujourd'hui
+    today_date = datetime.datetime.now().date()
+    
+    # Vérifie si la date de création correspond à la date d'aujourd'hui
+    if creation_datetime.date() == today_date:
+        return True
+    else:
+        return False
 
 
